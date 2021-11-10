@@ -37,9 +37,7 @@ export async function syncRoles(client: Client) {
    const guild = client.guilds.cache.get(server_id);
    if (!guild) return;
    const channel = guild.channels.cache.get('618438576119742464');
-   if (!channel) return;
-
-   if (!(channel instanceof TextChannel)) return logger.log('info', 'Couldnt find channel');
+   if (!(channel instanceof TextChannel)) return logger.info('Couldnt find channel');
 
    const messages = await channel.messages.fetch({ limit: 100 });
 
