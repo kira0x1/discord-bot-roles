@@ -13,7 +13,7 @@ FROM node:16-slim
 WORKDIR /mikaela-roles
 
 COPY package.json package.json
-COPY --from=builder /mikaela/node_modules node_modules
+COPY --from=builder /mikaela-roles/node_modules node_modules
 
 COPY . .
 
