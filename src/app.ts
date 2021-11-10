@@ -6,7 +6,7 @@ import { initVoiceManager, VoiceRoleManager } from './util/voiceRoleManager';
 import { logger } from './util/logger';
 
 const client = new Client({
-   intents: ['GUILDS', 'GUILD_EMOJIS_AND_STICKERS', 'GUILD_MESSAGE_REACTIONS']
+   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_EMOJIS_AND_STICKERS', 'GUILD_MESSAGE_REACTIONS']
 });
 
 client.once('ready', async () => {

@@ -47,7 +47,19 @@ export async function syncRoles(client: Client) {
    const reactions = messages.flatMap(m => m.reactions.cache);
    reactions.map(r => syncEmoji(r));
 
-   client.on('messageReactionRemove', (reaction, user) => {
+   client.on('messageReactionRemove', async (reaction, user) => {
+      // When a reaction is received, check if the structure is partial
+      if (reaction.partial) {
+         // If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
+         try {
+            await reaction.fetch();
+         } catch (error) {
+            console.error('Something went wrong when fetching the message:', error);
+            // Return as `reaction.message.author` may be undefined/null
+            return;
+         }
+      }
+
       if (
          customRoles.sections.map((section: RoleSection) =>
             section.roles.find(role => role.reactionName === reaction.emoji.name)
